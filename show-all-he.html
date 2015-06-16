@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>מילון הפשוט &mdash; כל המילים</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="jquery.min.js"></script>
+    <script>
+     var showWords = function(start, end) {
+        $.ajax({
+          url: "dict-he-en.json",
+          dataType: "text",
+          success: function(data) {
+            var word_list = $.parseJSON(data).words;
+            var words = word_list.slice(start, end);
+            document.getElementById('words').innerHTML = '';
+            for (i in words) {
+              var word = words[i];
+              var newWord = document.createElement('div');
+              newWord.className = 'word';
+              newWord.id = word.id;
+              
+              var wordTranslated = document.createElement('h2');
+              wordTranslated.innerHTML = word.translated;
+              wordTranslated.className = 'translated he';
+              
+              var wordPart = document.createElement('h3');
+              wordPart.innerHTML = word.part_of_speech;
+              wordPart.className = 'part he';
+              
+              var wordTranslation = document.createElement('p');
+              wordTranslation.innerHTML = word.translation;
+              wordTranslation.className = 'translation';
+              
+              newWord.appendChild(wordTranslated);
+              newWord.appendChild(wordPart);
+              newWord.appendChild(wordTranslation);
+              document.getElementById('words').appendChild(newWord)
+            }
+          }
+        })
+      }
+      var update = function() {
+        var start = document.getElementById('start').value;
+        var end = document.getElementById('end').value;
+        showWords(start, end)
+      }
+      document.onload(
+        $.ajax({
+          url: "dict-he-en-out.json",
+          dataType: "text",
+          success: function(data) {
+            var word_list = $.parseJSON(data).words;
+            document.getElementById('end').value = word_list.length;
+          }
+        })
+      )
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="translate-he.html">translate he</a>
+        <a href="translate-en.html">translate en</a>
+        <a href="show-all-he.html">all he</a>
+        <a href="show-all-en.html">all en</a>
+      </nav>
+      <img class="logo" src="logo.svg" alt="Milon Hapashut" />
+    </header>
+    <section>
+      <div class="he">
+        <input class="range" id="start" type="text" value="0" />:
+        <input class="range" id="end" type="text" value="100" />
+        <input type="submit" id="update" onclick="update()" value="עדכון" />
+      </div>
+      <div class="words" id="words"></div>
+    </section>
+    <footer><a href="https://github.com/chschtsch/milon">fork me on GitHub</a></footer>
+  </body>
+</html>

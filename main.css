@@ -1,0 +1,129 @@
+html, body {
+  background: #f4f4f4;
+  min-width: 400px;
+  margin: 0px auto;
+  font-family: "PT Sans", "Lucida Grande", sans-serif;
+}
+
+a {
+  color: #0af;
+  text-decoration: none;
+  transition: all .1s ease-in;
+}
+
+a:hover {
+  color: #4ef;
+  text-shadow: 0px 0px 2px rgba(68, 238, 255, .6), 0px 0px 5px rgba(68, 238, 255, .4);
+}
+
+header {
+  text-align: center;
+}
+
+header nav {
+  background: #000;
+}
+
+header nav a {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 3px 10px;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+}
+
+section {
+  margin: 0 auto;
+  width: 80%;
+  min-width: 350px;
+  max-width: 900px;
+  text-align: center;
+}
+
+.words {
+  margin: 0 auto;
+}
+
+.word {
+  width: auto;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #fff;
+  color: #000;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, .1), 0px 2px 5px rgba(0, 0, 0, .1);
+}
+
+.translated,
+.part,
+.translation {
+  display: block;
+  margin: 0 auto;
+  line-height: 120%;
+}
+
+.translated {
+  font-size: 25px;
+}
+
+.part {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  color: #aaa;
+}
+
+.translation {
+  font-size: 20px;
+}
+
+.he {
+  direction: rtl;
+}
+
+.range {
+  width: 60px;
+}
+
+footer {
+  margin: 15px auto;
+  text-align: center;
+}
+
+footer a {
+  font-size: 16px;
+  line-height: 100%;
+  color: #aaa;
+}
+
+footer a:hover {
+  color: #888;
+  text-shadow: none;
+}
+
+.blocks {
+  margin: 0 auto;
+  width: 270px;
+  font-size: 0;
+}
+
+.blocks a {
+  display: inline-block;
+  width: 120px;
+  height: 18px;
+  font-size: 18px;
+  line-height: 100%;
+  padding: 10px 5px;
+  margin: 1px;
+  color: #fff;
+  background: #444;
+  text-shadow: none;
+}
+
+.blocks a:hover {
+  background: #666;
+}
