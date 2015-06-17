@@ -2,20 +2,207 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Milon Hapashut</title>
+    <title>Milon Hapashut | מילון הפשוט</title>
     <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var getJsonData = function (url) {
+          var jsonData = null;
+          $.ajax({
+            async: false,
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+              jsonData = data;
+            }
+          });
+          return jsonData;
+        }
+        var postWord = function(lang) {
+          if (lang === 'he') {
+            var wordName = $('.he .wtt').val();
+            var jsonData = getJsonData('dict-he-en.json');
+            var words = jsonData.words;
+            for (i in words) {
+              var word = words[i];
+              var wordFound = null;
+              var dictWord = word.translated[0].replace(/[\u0591-\u05C7]/g,'');
+              if (dictWord === wordName) {
+                wordFound = true;
+              }
+              if (wordFound === true) {
+                var w = $('<div/>', {
+                  id: word.id,
+                  class: 'word',
+                });
+                
+                $('<h2/>', {
+                  class: 'rtl',
+                  text: word.translated,
+                }).appendTo(w);
+                
+                $('<h3/>', {
+                  class: 'rtl',
+                  text: word.part_of_speech,
+                }).appendTo(w);
+
+                $('<p/>', {
+                  text: word.translation,
+                }).appendTo(w);
+
+                w.prependTo('.he .words');
+              }
+            }
+          }
+          else if (lang === 'en') {
+            var wordName = $('.en .wtt').val();
+            var jsonData = getJsonData('dict-en-he.json');
+            var words = jsonData.words;
+            for (i in words) {
+              var word = words[i];
+              var wordFound = null;
+              var dictWord = word.translated[0];
+              if (dictWord.toUpperCase() === wordName.toUpperCase()) {
+                wordFound = true;
+              }
+              if (wordFound === true) {
+                var w = $('<div/>', {
+                  id: word.id,
+                  class: 'word',
+                });
+                
+                $('<h2/>', {
+                  text: word.translated,
+                }).appendTo(w);
+                
+                $('<h3/>', {
+                  text: word.part_of_speech,
+                }).appendTo(w);
+
+                $('<p/>', {
+                  class: 'rtl',
+                  text: word.translation,
+                }).appendTo(w);
+
+                w.prependTo('.en .words');
+              }
+            }
+          }
+        }
+        var sliceDict = function(lang, start, end) {
+          if (lang === 'he') {
+            var jsonData = getJsonData('dict-he-en.json');
+            var words = jsonData.words.slice(start, end);
+            $('.he .words').empty();
+            for (i in words) {
+              var word = words[i];
+              var w = $('<div/>', {
+                id: word.id,
+                class: 'word',
+              });
+              
+              $('<h2/>', {
+                class: 'rtl',
+                text: word.translated,
+              }).appendTo(w);
+              
+              $('<h3/>', {
+                class: 'rtl',
+                text: word.part_of_speech,
+              }).appendTo(w);
+
+              $('<p/>', {
+                text: word.translation,
+              }).appendTo(w);
+
+              w.appendTo('.he .words');
+            }
+          }
+          else if (lang === 'en') {
+            var jsonData = getJsonData('dict-en-he.json');
+            var words = jsonData.words;
+            var words = jsonData.words.slice(start, end);
+            $('.en .words').empty();
+            for (i in words) {
+              var word = words[i];
+              var w = $('<div/>', {
+                id: word.id,
+                class: 'word',
+              });
+              
+              $('<h2/>', {
+                text: word.translated,
+              }).appendTo(w);
+              
+              $('<h3/>', {
+                text: word.part_of_speech,
+              }).appendTo(w);
+
+              $('<p/>', {
+                class: 'rtl',
+                text: word.translation,
+              }).appendTo(w);
+
+              w.appendTo('.en .words');
+            }
+          }
+        }
+        $('.en .search').submit( function() {
+          postWord('en');
+        });
+        $('.he .search').submit( function() {
+          postWord('he');
+        });
+        $('.switch').click( function() {
+          $('.switch').toggleClass('he');
+          $('.switch').toggleClass('en');
+          $('section.en').toggleClass('invisible');
+          $('section.he').toggleClass('invisible');
+        });
+        $('.he .slice').submit( function () {
+          var start = $('.he .slice .start').val();
+          var end = $('.he .slice .end').val();
+          sliceDict('he', start, end);
+        });
+        $('.en .slice').submit( function () {
+          var start = $('.en .slice .start').val();
+          var end = $('.en .slice .end').val();
+          sliceDict('en', start, end);
+        });
+      });
+    </script>
   </head>
   <body>
-    <header><img class="logo" src="logo.svg" alt="Milon Hapashut" /></header>
-    <section>
-      <nav class="blocks">
-        <a href="translate-he.html">translate&nbsp;he</a>
-        <a href="translate-en.html">translate&nbsp;en</a>
-        <a href="show-all-he.html">all&nbsp;he</a>
-        <a href="show-all-en.html">all&nbsp;en</a>
-      </nav>
+    <header>
+      <img class="logo" src="logo.svg" alt="Milon Hapashut" />
+      <div class="switch he"></div>
+    </header>
+    <section class="en invisible">
+      <form action="#" class="search">
+        <input type="search" class="wtt" placeholder="Type word to translate" />
+        <input type="submit" value="Search">
+      </form>
+      <form action="#" class="slice">
+        <input type="text" class="start" placeholder="Start" />:
+        <input type="text" class="end" placeholder="End" />
+        <input type="submit" class="start" value="Slice" />
+      </form>
+      <div class="words"></div>
+    </section>
+    <section class="he">
+      <form action="#" class="search rtl">
+        <input type="search" class="wtt" placeholder="סוג המילה" />
+        <input type="submit" value="חפש">
+      </form>
+      <form action="#" class="slice rtl">
+        <input type="text" class="start" placeholder="התחלה" />:
+        <input type="text" class="end" placeholder="סוף" />
+        <input type="submit" class="start" value="פרס" />
+      </form>
+      <div class="words"></div>
     </section>
     <footer><a href="https://github.com/chschtsch/milon">fork me on GitHub</a></footer>
   </body>
