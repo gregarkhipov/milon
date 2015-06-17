@@ -59,6 +59,11 @@ section {
   text-align: center;
 }
 
+.start,
+.end {
+  width: 60px;
+}
+
 .words {
   margin: 0 auto;
 }
