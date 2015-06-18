@@ -1,6 +1,6 @@
 html, body {
   background: #f4f4f4;
-  min-width: 400px;
+  min-width: 320px;
   margin: 0px auto;
   font-family: "PT Sans", "Lucida Grande", sans-serif;
 }
@@ -54,13 +54,71 @@ header {
 section {
   margin: 0 auto;
   width: 80%;
-  min-width: 350px;
   max-width: 900px;
   text-align: center;
 }
 
-.start,
-.end {
+form,
+form * {
+  transition: all .1s ease-in;
+}
+
+form {
+  margin: 7px auto;
+  font-family: "PT Sans", "Lucida Grande", sans-serif;
+}
+
+form input[type="search"],
+form input[type="text"] {
+  font-size: 16px;
+  line-height: 100%;
+  padding: 6px 10px;
+  background: #fff;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .4), inset 0 1px 0 rgba(0, 0, 0, .2), inset 0 0 2px rgba(0, 0, 0, .2), inset 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+form input[type="search"]:focus,
+form input[type="text"]:focus {
+  box-shadow: 0 0 2px 3px #4bf, inset 0 1px 0px rgba(0, 0, 0, .1), inset 0 0 2px rgba(0, 0, 0, .1), inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+form input[type="submit"] {
+  font-size: 16px;
+  line-height: 100%;
+  width: auto;
+  height: auto;
+  line-height: 100%;
+  margin: 0px;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: #024;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
+  background: #3af;
+  border: 1px solid #08e;
+  border-radius: 4px;
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, .4), 0px 1px 0px rgba(255, 255, 255, .4);
+}
+
+form input[type="submit"]:hover {
+  background: #4bf;
+}
+
+form input[type="submit"]:active,
+form input[type="submit"]:focus {
+  color: #012;
+  background: #006fdf;
+  border-color: #06a;
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, .2), 0px 1px 0px rgba(255, 255, 255, .4);
+}
+
+form input[type="search"] {
+  width: 120px;
+}
+
+form .start,
+form .end {
   width: 60px;
 }
 

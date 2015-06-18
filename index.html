@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Milon Hapashut | מילון הפשוט</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -25,11 +26,11 @@
           if (lang === 'he') {
             var wordName = $('.he .wtt').val();
             var jsonData = getJsonData('dict-he-en.json');
-            var words = jsonData.words;
+            var words = jsonData;
             for (i in words) {
               var word = words[i];
               var wordFound = null;
-              var dictWord = word.translated[0].replace(/[\u0591-\u05C7]/g,'');
+              var dictWord = word.translated.replace(/[\u0591-\u05C7]/g,'');
               if (dictWord === wordName) {
                 wordFound = true;
               }
@@ -60,11 +61,11 @@
           else if (lang === 'en') {
             var wordName = $('.en .wtt').val();
             var jsonData = getJsonData('dict-en-he.json');
-            var words = jsonData.words;
+            var words = jsonData;
             for (i in words) {
               var word = words[i];
               var wordFound = null;
-              var dictWord = word.translated[0];
+              var dictWord = word.translated;
               if (dictWord.toUpperCase() === wordName.toUpperCase()) {
                 wordFound = true;
               }
@@ -95,7 +96,7 @@
         var sliceDict = function(lang, start, end) {
           if (lang === 'he') {
             var jsonData = getJsonData('dict-he-en.json');
-            var words = jsonData.words.slice(start, end);
+            var words = jsonData.slice(start, end);
             $('.he .words').empty();
             for (i in words) {
               var word = words[i];
@@ -123,8 +124,7 @@
           }
           else if (lang === 'en') {
             var jsonData = getJsonData('dict-en-he.json');
-            var words = jsonData.words;
-            var words = jsonData.words.slice(start, end);
+            var words = jsonData.slice(start, end);
             $('.en .words').empty();
             for (i in words) {
               var word = words[i];
