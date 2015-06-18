@@ -71,8 +71,8 @@ form {
 form input[type="search"],
 form input[type="text"] {
   font-size: 16px;
-  line-height: 100%;
-  padding: 6px 10px;
+  line-height: 20px;
+  padding: 5px 10px;
   background: #fff;
   border: none;
   border-radius: 3px;
@@ -86,12 +86,12 @@ form input[type="text"]:focus {
 
 form input[type="submit"] {
   font-size: 16px;
-  line-height: 100%;
+  line-height: 18px;
   width: auto;
   height: auto;
   line-height: 100%;
   margin: 0px;
-  padding: 4px 12px;
+  padding: 5px 12px;
   cursor: pointer;
   color: #024;
   text-shadow: 0 1px 0 rgba(255, 255, 255, .4);
@@ -105,8 +105,7 @@ form input[type="submit"]:hover {
   background: #4bf;
 }
 
-form input[type="submit"]:active,
-form input[type="submit"]:focus {
+form input[type="submit"]:active {
   color: #012;
   background: #006fdf;
   border-color: #06a;
