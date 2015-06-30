@@ -25,8 +25,21 @@ header {
   margin: 0 auto;
 }
 
+.hint {
+  display: block;
+  position: absolute;
+  z-index: 45;
+  top: 20px;
+  left: 0;
+  right: 195px;
+  width: 85px;
+  height: 50px;
+  margin: auto;
+}
+
 .switch {
   position: absolute;
+  z-index: 50;
   top: 47px;
   left: 0;
   right: 140px;
